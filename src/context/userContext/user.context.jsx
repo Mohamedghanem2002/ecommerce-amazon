@@ -1,16 +1,24 @@
-import { createContext, useState } from "react"
+// context/userContext/user.context.js
+import { createContext, useState } from "react";
 
-export const userContext = createContext('')
+export const UserContext = createContext();
 
+export default function UserProvider({ children }) {
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
-export default function UserProvider({children}) {
-    const [token, setToken] = useState(localStorage.getItem('token'))
+  const login = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+  };
 
-    function logOut(){
-        setToken(null)
-        localStorage.removeItem('token')
-    }
-    return <userContext.Provider value={{ token, setToken , logOut }}>
-        {children}
-    </userContext.Provider>
+  const logout = () => {
+    setToken(null);
+    localStorage.removeItem('token');
+  };
+
+  return (
+    <UserContext.Provider value={{ token, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  );
 }
