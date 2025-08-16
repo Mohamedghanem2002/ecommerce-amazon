@@ -1,3 +1,4 @@
+// SingleProduct.jsx
 import React, { useState, useContext } from "react";
 import { FiHeart, FiShare2, FiStar, FiChevronRight } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -5,12 +6,15 @@ import { GrSecure } from "react-icons/gr";
 import { CiCreditCard1 } from "react-icons/ci";
 import { IoLocationSharp } from "react-icons/io5";
 import img from "../assets/images/WhatsApp Image 2025-08-15 at 14.53.26_c78ffe47.jpg";
-import { cartContext } from "../context/cartContext/cart.context";
 import { toast } from "react-hot-toast";
 import '../styles/index.css';
 
+// This is the line that was changed
+import { CartContext } from "../context/cartContext/cart.context"; 
+
 function SingleProduct() {
-  const { addToCart } = useContext(cartContext);
+  // And this is the line that needs to match the new import
+  const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
 
   const product = {
