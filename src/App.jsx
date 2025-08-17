@@ -1,4 +1,3 @@
-// App.jsx
 import { useState, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -21,6 +20,7 @@ function App({ children }) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {}
       <UserProvider>
         <CartProvider>
           <Suspense fallback={<LoadingSpinner />}>

@@ -36,7 +36,7 @@ function Login() {
           className="mx-auto h-12 w-auto" 
           src={logo} 
           alt="Amazon" 
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/Home')}
           style={{ cursor: 'pointer' }}
         />
       </div>

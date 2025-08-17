@@ -1,6 +1,4 @@
-// router.js
 import { createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -12,13 +10,9 @@ import Register from './pages/Register';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <ProtectedRoute>
-        <Layout />
-      </ProtectedRoute>
-    ),
+    element: <Layout />,  // Removed ProtectedRoute
     children: [
-      { index: true, element: <Home /> },
+      { path: 'Home', element: <Home /> },
       { path: 'products', element: <Products /> },
       { path: 'product/:id', element: <SingleProduct /> },
       { path: 'cart', element: <Cart /> },
