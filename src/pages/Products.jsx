@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import '../styles/index.css';
+import "../styles/index.css";
 import { FiStar } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
-import img from '../assets/images/WhatsApp Image 2025-08-15 at 14.51.49_d9d33ac5.jpg';
+import img from "../assets/images/WhatsApp Image 2025-08-15 at 14.51.49_d9d33ac5.jpg";
 
 function Products() {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -17,7 +17,11 @@ function Products() {
           className="w-full inline-flex items-center justify-between rounded border border-gray-300 bg-white py-2 px-3 text-sm font-medium shadow-sm hover:bg-gray-50"
         >
           <span>Filters</span>
-          <IoIosArrowDown className={`h-4 w-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} />
+          <IoIosArrowDown
+            className={`h-4 w-4 transition-transform ${
+              filtersOpen ? "rotate-180" : ""
+            }`}
+          />
         </button>
       </div>
 
@@ -25,13 +29,18 @@ function Products() {
         {/* Sidebar (filters) */}
         <aside
           className={`w-full md:w-64 lg:w-72 shrink-0 rounded border border-gray-200 bg-white p-4 ${
-            filtersOpen ? 'block' : 'hidden'
+            filtersOpen ? "block" : "hidden"
           } md:block`}
         >
           <div className="sidebar-header">
             <div>
-              <h2 className="text-base text-black font-bold mb-2">Delivery Day</h2>
-              <label htmlFor="delivery2days" className="inline-flex items-center gap-3">
+              <h2 className="text-base text-black font-bold mb-2">
+                Delivery Day
+              </h2>
+              <label
+                htmlFor="delivery2days"
+                className="inline-flex items-center gap-3"
+              >
                 <input
                   type="checkbox"
                   className="size-3 rounded border-gray-300 shadow-sm"
@@ -42,11 +51,16 @@ function Products() {
             </div>
 
             <div className="review mt-6">
-              <h2 className="text-base text-black font-bold mb-2">Customer Reviews</h2>
+              <h2 className="text-base text-black font-bold mb-2">
+                Customer Reviews
+              </h2>
               <div className="flex items-center gap-2">
                 <div className="rating flex flex-row gap-0.5">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <IoStar key={star} className="w-3 h-3 text-yellow-400 fill-current" />
+                    <IoStar
+                      key={star}
+                      className="w-3 h-3 text-yellow-400 fill-current"
+                    />
                   ))}
                 </div>
                 <p className="text-sm text-gray-700">& up</p>
@@ -57,13 +71,13 @@ function Products() {
               <h2 className="text-base text-black font-bold mb-2">Brands</h2>
               <div className="space-y-2">
                 {[
-                  'Samsung',
-                  'LG',
-                  'Hier',
-                  'Daikin',
-                  'Godrej',
-                  'IFB',
-                  'Panasonic',
+                  "Samsung",
+                  "LG",
+                  "Hier",
+                  "Daikin",
+                  "Godrej",
+                  "IFB",
+                  "Panasonic",
                 ].map((brand, i) => {
                   const id = `brand_${i}`;
                   return (
@@ -84,17 +98,21 @@ function Products() {
               <h2 className="text-base text-black font-bold mb-2">Price</h2>
               <div className="space-y-2">
                 {[
-                  'All',
-                  '$5000 - $10000',
-                  '$10000 - $15000',
-                  '$15000 - $20000',
-                  '$20000 - $25000',
-                  '$25000 - $30000',
+                  "All",
+                  "$5000 - $10000",
+                  "$10000 - $15000",
+                  "$15000 - $20000",
+                  "$20000 - $25000",
+                  "$25000 - $30000",
                 ].map((label, i) => {
                   const id = `price_${i}`;
                   return (
                     <label key={id} htmlFor={id} className="flex items-center">
-                      <input id={id} type="checkbox" className="mr-2 size-3 rounded border-gray-300 shadow-sm" />
+                      <input
+                        id={id}
+                        type="checkbox"
+                        className="mr-2 size-3 rounded border-gray-300 shadow-sm"
+                      />
                       <span className="text-sm text-gray-800">{label}</span>
                     </label>
                   );
@@ -121,25 +139,36 @@ function Products() {
                 </div>
                 <div className="p-2">
                   <h2 className="text-sm font-medium text-gray-900 line-clamp-2 h-10">
-                    Product {index + 1} - High-quality product with amazing features
+                    Product {index + 1} - High-quality product with amazing
+                    features
                   </h2>
                   <div className="flex items-center mt-1">
                     <div className="flex">
                       {[1, 2, 3, 4, 5].map((star) => (
-                        <FiStar key={star} className="w-3 h-3 text-yellow-400 fill-current" />
+                        <FiStar
+                          key={star}
+                          className="w-3 h-3 text-yellow-400 fill-current"
+                        />
                       ))}
                     </div>
                     <IoIosArrowDown className="w-3 h-3 text-gray-400 ml-1" />
                     <span className="text-xs text-blue-500 ml-1">13,900</span>
                   </div>
                   <div className="mt-1">
-                    <span className="text-sm font-bold">${(49.99 + index * 10).toFixed(2)}</span>
+                    <span className="text-sm font-bold">
+                      ${(49.99 + index * 10).toFixed(2)}
+                    </span>
                     <span className="text-xs text-gray-500 ml-1">List: </span>
-                    <span className="text-xs text-gray-500 line-through">${(59.99 + index * 10).toFixed(2)}</span>
-                    <span className="text-xs text-green-700 ml-1">(10% off)</span>
+                    <span className="text-xs text-gray-500 line-through">
+                      ${(59.99 + index * 10).toFixed(2)}
+                    </span>
+                    <span className="text-xs text-green-700 ml-1">
+                      (10% off)
+                    </span>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    FREE delivery <span className="font-medium">Sat, Aug 16</span>
+                    FREE delivery{" "}
+                    <span className="font-medium">Sat, Aug 16</span>
                   </p>
                   <p className="text-xs text-green-700 mt-1">Prime</p>
                   <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-xs py-1 px-3 rounded mt-2 border border-gray-300">
