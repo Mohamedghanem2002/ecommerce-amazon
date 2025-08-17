@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// رابط الـ API الأساسي
+// API 
 const API_BASE_URL = "https://fakestoreapi.com";
 
 // ================== Products ==================
