@@ -95,7 +95,7 @@ function Products() {
       <div className="flex flex-col md:flex-row md:items-start gap-6">
         {/* Sidebar (filters) */}
         <aside
-          className={`w-full md:w-64 lg:w-72 shrink-0 rounded border border-gray-200 bg-white p-4 ${
+          className={`w-full md:w-64 lg:w-72 shrink-0 rounded border border-gray-200 bg-white p-4 sticky top-4   ${
             filtersOpen ? "block" : "hidden"
           } md:block`}
         >
