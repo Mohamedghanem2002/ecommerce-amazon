@@ -183,7 +183,7 @@ function Products() {
         {/* Products grid */}
         <section className="flex-1">
           {filteredProducts.length === 0 ? (
-            <p>No products found</p>
+            <p>Loading......</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredProducts.map((product) => (

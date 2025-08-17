@@ -4,10 +4,8 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaBars, FaFlagUsa, FaSearch, FaOpencart } from "react-icons/fa";
 
 function Navbar() {
-  return(
-
-
-     <div className=" bg-white">
+  return (
+    <div className=" bg-white">
       {/* Header */}
       <header id="head" className="bg-[#131921] text-white relative z-50">
         {/* Top Navigation */}
@@ -16,15 +14,23 @@ function Navbar() {
           <div className="flex items-center justify-between lg:justify-start gap-3 lg:gap-6">
             {/* Amazon Logo */}
             <Link to="/Home" className="flex items-center flex-shrink-0">
-              <img src="src\assets\images\Amazon.png" alt="Amazon Logo" className="h-8 w-auto" />
+              <img
+                src="src\assets\images\Amazon.png"
+                alt="Amazon Logo"
+                className="h-8 w-auto"
+              />
             </Link>
 
             {/* Delivery Location */}
             <div className="hidden md:flex items-center gap-2 text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
               <CiLocationOn className="text-lg lg:text-xl flex-shrink-0" />
               <div className="min-w-0">
-                <div className="text-xs text-gray-300 truncate">Delivering to Surat 394210</div>
-                <div className="font-semibold text-xs lg:text-sm truncate">Update location</div>
+                <div className="text-xs text-gray-300 truncate">
+                  Delivering to Surat 394210
+                </div>
+                <div className="font-semibold text-xs lg:text-sm truncate">
+                  Update location
+                </div>
               </div>
             </div>
             <button className="lg:hidden p-2 hover:border hover:border-white hover:border-opacity-50 rounded transition-all min-w-[44px] min-h-[44px] flex items-center justify-center">
@@ -61,8 +67,13 @@ function Navbar() {
             </div>
 
             {/* Account */}
-            <Link to="/auth/login" className="text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-0">
-              <div className="text-xs hidden sm:block text-gray-300">Hello, sign in</div>
+            <Link
+              to="/auth/login"
+              className="text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-0"
+            >
+              <div className="text-xs hidden sm:block text-gray-300">
+                Hello, sign in
+              </div>
               <div className="font-semibold flex items-center gap-1">
                 Account & Lists
                 <span className="text-xs hidden sm:inline">▼</span>
@@ -76,7 +87,10 @@ function Navbar() {
             </div>
 
             {/* Cart */}
-            <Link to="/cart" className="flex items-center gap-2 hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-[44px] min-h-[44px]">
+            <Link
+              to="/cart"
+              className="flex items-center gap-2 hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-[44px] min-h-[44px]"
+            >
               <FaOpencart className="text-lg lg:text-xl flex-shrink-0" />
               <span className="font-semibold text-xs lg:text-sm">Cart</span>
             </Link>
@@ -86,12 +100,13 @@ function Navbar() {
         {/* Secondary Navigation */}
         <div className="bg-[#232f3e] px-3 sm:px-4 lg:px-6 py-2 sm:py-3">
           <div className="flex items-center gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm overflow-x-auto scrollbar-hide">
-            <div className="flex items-center gap-2 flex-shrink-0 p-1 rounded transition-all cursor-pointer">
-              <FaBars />
-              <a href="#hero">
+            <Link to={"/products"}>
+              <div className="flex items-center gap-2 flex-shrink-0 p-1 rounded transition-all cursor-pointer">
+                <FaBars />
+
                 <span>All</span>
-              </a>
-            </div>
+              </div>
+            </Link>
             {[
               { text: "Sell", href: "#hero" },
               { text: "Amazon miniTV", href: "#", hideOn: "sm" },
@@ -107,12 +122,12 @@ function Navbar() {
                   item.hideOn === "sm"
                     ? "hidden sm:inline"
                     : item.hideOn === "md"
-                      ? "hidden md:inline"
-                      : item.hideOn === "lg"
-                        ? "hidden lg:inline"
-                        : item.hideOn === "xl"
-                          ? "hidden xl:inline"
-                          : ""
+                    ? "hidden md:inline"
+                    : item.hideOn === "lg"
+                    ? "hidden lg:inline"
+                    : item.hideOn === "xl"
+                    ? "hidden xl:inline"
+                    : ""
                 }`}
               >
                 <span>{item.text}</span>
@@ -122,7 +137,7 @@ function Navbar() {
         </div>
       </header>
     </div>
-  ) ;
+  );
 }
 
 export default Navbar;
