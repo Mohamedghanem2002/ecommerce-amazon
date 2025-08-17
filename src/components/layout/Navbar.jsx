@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { FaBars, FaFlagUsa, FaSearch, FaOpencart } from "react-icons/fa";
 
@@ -14,9 +15,9 @@ function Navbar() {
           {/* Left Section */}
           <div className="flex items-center justify-between lg:justify-start gap-3 lg:gap-6">
             {/* Amazon Logo */}
-            <div className="flex items-center flex-shrink-0">
-              <img src="src\assets\images\Amazon.png"/>
-            </div>
+            <Link to="/Home" className="flex items-center flex-shrink-0">
+              <img src="src\assets\images\Amazon.png" alt="Amazon Logo" className="h-8 w-auto" />
+            </Link>
 
             {/* Delivery Location */}
             <div className="hidden md:flex items-center gap-2 text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
@@ -60,13 +61,13 @@ function Navbar() {
             </div>
 
             {/* Account */}
-            <div className="text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-0">
+            <Link to="/auth/login" className="text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-0">
               <div className="text-xs hidden sm:block text-gray-300">Hello, sign in</div>
               <div className="font-semibold flex items-center gap-1">
                 Account & Lists
                 <span className="text-xs hidden sm:inline">▼</span>
               </div>
-            </div>
+            </Link>
 
             {/* Returns & Orders */}
             <div className="text-xs lg:text-sm hidden md:block hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
@@ -75,10 +76,10 @@ function Navbar() {
             </div>
 
             {/* Cart */}
-            <div className="flex items-center gap-2 hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-[44px] min-h-[44px]">
+            <Link to="/cart" className="flex items-center gap-2 hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-[44px] min-h-[44px]">
               <FaOpencart className="text-lg lg:text-xl flex-shrink-0" />
               <span className="font-semibold text-xs lg:text-sm">Cart</span>
-            </div>
+            </Link>
           </div>
         </div>
 
