@@ -4,6 +4,7 @@ import { FiStar } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
 import { getProducts } from "../utils/api";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -191,13 +192,15 @@ function Products() {
                   key={product.id}
                   className="bg-white p-4 border border-gray-200 rounded hover:shadow-md transition-shadow"
                 >
-                  <div className="flex justify-center mb-3">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="h-40 sm:h-48 object-contain"
-                    />
-                  </div>
+                  <Link to={`/product/${product.id}`}>
+                    <div className="flex justify-center mb-3">
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="h-40 sm:h-48 object-contain"
+                      />
+                    </div>
+                  </Link>
                   <div className="p-2">
                     <h2 className="text-sm font-medium text-gray-900 line-clamp-2 h-10">
                       {product.title}
