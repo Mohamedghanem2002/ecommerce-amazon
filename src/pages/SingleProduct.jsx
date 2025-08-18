@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FiStar } from "react-icons/fi";
 import { IoArrowDownSharp, IoLocationSharp } from "react-icons/io5";
 import { GrSecure } from "react-icons/gr";
@@ -12,8 +12,6 @@ function SingleProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,10 +29,6 @@ function SingleProduct() {
 
   if (loading) return <p>Loading...</p>;
   if (!product) return <p>Product not found!</p>;
-
-  const handleAddToCart = () => {
-    addToCart({ ...product, quantity });
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -126,8 +120,7 @@ function SingleProduct() {
           <div className="mb-4">
             <p className="text-sm font-medium text-gray-900 mb-1">Quantity:</p>
             <select
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              value={1}
               className="w-full p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             >
               {[...Array(10).keys()].map((num) => (
@@ -139,10 +132,7 @@ function SingleProduct() {
           </div>
 
           {/* Buttons */}
-          <button
-            onClick={handleAddToCart}
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 py-2 px-4 rounded-md font-medium mb-3 transition-colors"
-          >
+          <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 py-2 px-4 rounded-md font-medium mb-3 transition-colors">
             Add to Cart
           </button>
           <button className="w-full bg-orange-100 hover:bg-orange-200 text-gray-900 py-2 px-4 rounded-md font-medium transition-colors">
