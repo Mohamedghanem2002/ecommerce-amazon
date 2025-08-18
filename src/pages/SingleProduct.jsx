@@ -45,7 +45,7 @@ function SingleProduct() {
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-96 object-cover"
+              className="object-cover "
             />
           </div>
         </div>
