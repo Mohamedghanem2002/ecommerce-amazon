@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FiStar } from "react-icons/fi";
 import { IoArrowDownSharp, IoLocationSharp } from "react-icons/io5";
 import { GrSecure } from "react-icons/gr";
