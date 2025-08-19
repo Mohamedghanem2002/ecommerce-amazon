@@ -1,7 +1,3 @@
-import React from "react";
-import { CiLocationOn } from "react-icons/ci";
-import { FaBars, FaFlagUsa, FaSearch, FaOpencart } from "react-icons/fa";
-
 function Home() {
   return (
     <div className=" bg-white">

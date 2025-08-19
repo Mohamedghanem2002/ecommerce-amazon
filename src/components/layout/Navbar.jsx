@@ -1,143 +1,304 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { CiLocationOn } from "react-icons/ci";
-import { FaBars, FaFlagUsa, FaSearch, FaOpencart } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiSearch, FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { IoLocationOutline } from "react-icons/io5";
+import { UserContext } from "../../context/userContext/user.context";
+import { CartContext } from "../../context/cartContext/cart.context";
+import logo from "../../assets/images/amazon-logo-transparent.png";
 
-function Navbar() {
+export default function Navbar() {
+  const { user, logout } = useContext(UserContext);
+  const { getCartCount } = useContext(CartContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
+  const cartCount = getCartCount();
+
   return (
-    <div className=" bg-white">
-      {/* Header */}
-      <header id="head" className="bg-[#131921] text-white relative z-50">
-        {/* Top Navigation */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between px-3 sm:px-4 lg:px-6 py-2 sm:py-3 gap-3 lg:gap-0">
-          {/* Left Section */}
-          <div className="flex items-center justify-between lg:justify-start gap-3 lg:gap-6">
-            {/* Amazon Logo */}
-            <Link to="/Home" className="flex items-center flex-shrink-0">
-              <img
-                src="src\assets\images\Amazon.png"
-                alt="Amazon Logo"
-                className="h-8 w-auto"
-              />
-            </Link>
-
-            {/* Delivery Location */}
-            <div className="hidden md:flex items-center gap-2 text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
-              <CiLocationOn className="text-lg lg:text-xl flex-shrink-0" />
-              <div className="min-w-0">
-                <div className="text-xs text-gray-300 truncate">
-                  Delivering to Surat 394210
-                </div>
-                <div className="font-semibold text-xs lg:text-sm truncate">
-                  Update location
-                </div>
-              </div>
+    <header className="bg-gray-900 text-white">
+      {/* Top bar */}
+      <div className="bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-10">
+            <div className="flex items-center space-x-4 text-xs">
+              <span>Free delivery on orders over $50</span>
             </div>
-            <button className="lg:hidden p-2 hover:border hover:border-white hover:border-opacity-50 rounded transition-all min-w-[44px] min-h-[44px] flex items-center justify-center">
-              <FaBars className="text-lg" />
-            </button>
-          </div>
-
-          {/* Search Bar */}
-          <div className="flex-1 max-w-none lg:max-w-3xl xl:max-w-4xl lg:mx-6 xl:mx-8 order-3 lg:order-2">
-            <div className="flex shadow-sm">
-              <select className="bg-gray-200 text-black px-2 sm:px-0.5 py-2.5 sm:py-3 rounded-l border-r border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
-                <option>All</option>
-                <option>Books</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-              </select>
-              <input
-                placeholder="Search Amazon.in"
-                className="flex-1 rounded-none border-0 focus:ring-2 focus:ring-orange-500 text-black px-3 sm:px-4 py-2.5 sm:py-3 outline-none text-sm sm:text-base"
-              />
-              <button className="bg-[#febd69] hover:bg-[#f3a847] text-black rounded-r px-4 sm:px-5 py-2.5 sm:py-3 transition-colors min-w-[44px] flex items-center justify-center">
-                <FaSearch className="text-sm sm:text-base" />
+            <div className="flex items-center space-x-4 text-xs">
+              <button className="hover:text-yellow-400">Help</button>
+              <button className="hover:text-yellow-400">
+                Customer Service
               </button>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Right Section */}
-          <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 order-2 lg:order-3">
-            {/* Language */}
-            <div className="hidden sm:flex items-center gap-1 text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
-              <FaFlagUsa className="flex-shrink-0" />
-              <span>EN</span>
-              <span className="text-xs">▼</span>
+      {/* Main navbar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 mr-6">
+            <img
+              src={logo}
+              alt="Amazon"
+              className="h-8 w-auto filter brightness-0 invert"
+            />
+          </Link>
+
+          {/* Location */}
+          <div className="hidden lg:flex items-center text-sm mr-6 hover:text-yellow-400 cursor-pointer">
+            <IoLocationOutline className="text-lg mr-1" />
+            <div>
+              <div className="text-xs text-gray-300">Deliver to</div>
+              <div className="font-medium">Egypt</div>
             </div>
+          </div>
+
+          {/* Search bar */}
+          <form onSubmit={handleSearch} className="flex-1 max-w-2xl mx-4">
+            <div className="flex">
+              <select className="bg-gray-200 text-black px-3 py-2 rounded-l-md text-sm border-r border-gray-300 focus:outline-none">
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Clothing</option>
+                <option>Books</option>
+              </select>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search Amazon.eg"
+                className="flex-1 px-4 py-2 text-black focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-r-md transition-colors"
+              >
+                <FiSearch className="text-black" />
+              </button>
+            </div>
+          </form>
+
+          {/* Right side icons */}
+          <div className="flex items-center space-x-6">
+            {/* Language selector */}
+            <button className="hidden sm:flex items-center text-sm hover:text-yellow-400">
+              <span className="flag-icon flag-icon-us w-5 h-3 mr-1"></span>
+              EN
+            </button>
 
             {/* Account */}
-            <Link
-              to="/auth/login"
-              className="text-xs lg:text-sm hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-0"
-            >
-              <div className="text-xs hidden sm:block text-gray-300">
-                Hello, sign in
-              </div>
-              <div className="font-semibold flex items-center gap-1">
-                Account & Lists
-                <span className="text-xs hidden sm:inline">▼</span>
-              </div>
-            </Link>
+            <div className="relative group">
+              <Link
+                to={user ? "/account" : "/auth/login"}
+                className="flex flex-col items-center text-xs hover:text-yellow-400"
+              >
+                <FiUser className="text-lg mb-1" />
+                <div className="hidden sm:block">
+                  <div>Hello, {user ? user.name.split(" ")[0] : "Sign in"}</div>
+                  <div className="font-medium">Account & Lists</div>
+                </div>
+              </Link>
 
-            {/* Returns & Orders */}
-            <div className="text-xs lg:text-sm hidden md:block hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer">
-              <div className="text-xs text-gray-300">Returns</div>
-              <div className="font-semibold">& Orders</div>
+              {/* Dropdown menu */}
+              {user && (
+                <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="py-2">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      Your Profile
+                    </Link>
+                    <Link
+                      to="/orders"
+                      className="block px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      Your Orders
+                    </Link>
+                    <Link
+                      to="/wishlist"
+                      className="block px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      Your Wish List
+                    </Link>
+                    <hr className="my-2" />
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
+
+            {/* Orders */}
+            <Link
+              to="/orders"
+              className="hidden sm:flex flex-col items-center text-xs hover:text-yellow-400"
+            >
+              <div>Returns</div>
+              <div className="font-medium">& Orders</div>
+            </Link>
 
             {/* Cart */}
             <Link
               to="/cart"
-              className="flex items-center gap-2 hover:border hover:border-white hover:border-opacity-50 p-1 rounded transition-all cursor-pointer min-w-[44px] min-h-[44px]"
+              className="relative flex items-center hover:text-yellow-400"
             >
-              <FaOpencart className="text-lg lg:text-xl flex-shrink-0" />
-              <span className="font-semibold text-xs lg:text-sm">Cart</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Secondary Navigation */}
-        <div className="bg-[#232f3e] px-3 sm:px-4 lg:px-6 py-2 sm:py-3">
-          <div className="flex items-center gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm overflow-x-auto scrollbar-hide">
-            <Link to={"/products"}>
-              <div className="flex items-center gap-2 flex-shrink-0 p-1 rounded transition-all cursor-pointer">
-                <FaBars />
-
-                <span>All</span>
+              <div className="relative">
+                <FiShoppingCart className="text-2xl" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                    {cartCount > 99 ? "99+" : cartCount}
+                  </span>
+                )}
+              </div>
+              <div className="hidden sm:block ml-2">
+                <div className="text-xs">Cart</div>
+                <div className="font-medium">{cartCount}</div>
               </div>
             </Link>
-            {[
-              { text: "Sell", href: "#hero" },
-              { text: "Amazon miniTV", href: "#", hideOn: "sm" },
-              { text: "Best Sellers", href: "#best" },
-              { text: "Today's Deals", href: "#" },
-              { text: "Mobiles", href: "#" },
-              { text: "Fashion", href: "#", hideOn: "lg" },
-            ].map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className={`flex-shrink-0  p-1 rounded transition-all cursor-pointer ${
-                  item.hideOn === "sm"
-                    ? "hidden sm:inline"
-                    : item.hideOn === "md"
-                    ? "hidden md:inline"
-                    : item.hideOn === "lg"
-                    ? "hidden lg:inline"
-                    : item.hideOn === "xl"
-                    ? "hidden xl:inline"
-                    : ""
-                }`}
-              >
-                <span>{item.text}</span>
-              </a>
-            ))}
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="sm:hidden p-2 hover:bg-gray-700 rounded-md"
+            >
+              {isMenuOpen ? <FiX /> : <FiMenu />}
+            </button>
           </div>
         </div>
-      </header>
-    </div>
+      </div>
+
+      {/* Secondary navigation */}
+      <div className="bg-gray-800 border-t border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center h-10 space-x-6 text-sm">
+            <Link
+              to="/products"
+              className="hover:text-yellow-400 flex items-center"
+            >
+              <FiMenu className="mr-1" />
+              All
+            </Link>
+            <Link
+              to="/products?category=electronics"
+              className="hover:text-yellow-400"
+            >
+              Electronics
+            </Link>
+            <Link
+              to="/products?category=jewelery"
+              className="hover:text-yellow-400"
+            >
+              Jewelry
+            </Link>
+            <Link
+              to="/products?category=men's clothing"
+              className="hover:text-yellow-400"
+            >
+              Men's Fashion
+            </Link>
+            <Link
+              to="/products?category=women's clothing"
+              className="hover:text-yellow-400"
+            >
+              Women's Fashion
+            </Link>
+            <Link to="/deals" className="hover:text-yellow-400">
+              Today's Deals
+            </Link>
+            <Link to="/prime" className="hover:text-yellow-400">
+              Prime
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="sm:hidden bg-gray-800 border-t border-gray-700">
+          <div className="px-4 py-2 space-y-2">
+            {!user ? (
+              <>
+                <Link
+                  to="/auth/login"
+                  className="block py-2 text-yellow-400 hover:text-white"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/auth/signup"
+                  className="block py-2 hover:text-yellow-400"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Create Account
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className="py-2 text-yellow-400">Hello, {user.name}</div>
+                <Link
+                  to="/orders"
+                  className="block py-2 hover:text-yellow-400"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Your Orders
+                </Link>
+                <Link
+                  to="/cart"
+                  className="block py-2 hover:text-yellow-400"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Cart ({cartCount})
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left py-2 hover:text-yellow-400"
+                >
+                  Sign Out
+                </button>
+              </>
+            )}
+            <hr className="border-gray-600 my-2" />
+            <Link
+              to="/products"
+              className="block py-2 hover:text-yellow-400"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              All Products
+            </Link>
+            <Link
+              to="/deals"
+              className="block py-2 hover:text-yellow-400"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Today's Deals
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
-
-export default Navbar;
