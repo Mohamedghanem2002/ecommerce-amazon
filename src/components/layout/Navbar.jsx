@@ -6,7 +6,6 @@ import { UserContext } from "../../context/userContext/user.context";
 import { CartContext } from "../../context/cartContext/cart.context";
 import logo from "../../assets/images/amazon-logo-transparent.png";
 
-// mgdd
 export default function Navbar() {
   const { user, logout } = useContext(UserContext);
   const { getCartCount } = useContext(CartContext);
