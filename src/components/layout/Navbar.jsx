@@ -199,34 +199,22 @@ export default function Navbar() {
               <FiMenu className="mr-1" />
               All
             </Link>
-            <Link
-              to="/products?category=electronics"
-              className="hover:text-yellow-400"
-            >
+            <Link to="/products" className="hover:text-yellow-400">
               Electronics
             </Link>
-            <Link
-              to="/products?category=jewelery"
-              className="hover:text-yellow-400"
-            >
+            <Link to="/products" className="hover:text-yellow-400">
               Jewelry
             </Link>
-            <Link
-              to="/products?category=men's clothing"
-              className="hover:text-yellow-400"
-            >
+            <Link to="/products" className="hover:text-yellow-400">
               Men's Fashion
             </Link>
-            <Link
-              to="/products?category=women's clothing"
-              className="hover:text-yellow-400"
-            >
+            <Link to="/products" className="hover:text-yellow-400">
               Women's Fashion
             </Link>
-            <Link to="/deals" className="hover:text-yellow-400">
+            <Link to="/products" className="hover:text-yellow-400">
               Today's Deals
             </Link>
-            <Link to="/prime" className="hover:text-yellow-400">
+            <Link to="/products" className="hover:text-yellow-400">
               Prime
             </Link>
           </div>
