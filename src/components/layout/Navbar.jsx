@@ -28,6 +28,7 @@ export default function Navbar() {
 
   const cartCount = getCartCount();
 
+  // mg
   return (
     <header className="bg-gray-900 text-white">
       {/* Top bar */}
