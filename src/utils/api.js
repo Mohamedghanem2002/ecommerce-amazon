@@ -5,6 +5,11 @@ const API_BASE_URL = "https://nodejs2323.vercel.app/api";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 30000,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 api.interceptors.request.use((config) => {
@@ -106,6 +111,16 @@ export const removeFromCart = async (productId) => {
   }
 };
 
+export const clearCart = async () => {
+  try {
+    const res = await api.delete("/cart/clear");
+    return res.data;
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+    throw error;
+  }
+};
+
 // ================== Auth / Users ==================
 export const registerUser = async (userData) => {
   try {
@@ -128,9 +143,9 @@ export const loginUser = async (credentials) => {
 };
 
 // ================== Orders ==================
-export const checkout = async () => {
+export const checkout = async (checkoutData) => {
   try {
-    const res = await api.post("/orders/checkout");
+    const res = await api.post("/orders/checkout", checkoutData);
     return res.data;
   } catch (error) {
     console.error("Error during checkout:", error);
@@ -144,6 +159,82 @@ export const getOrders = async () => {
     return res.data;
   } catch (error) {
     console.error("Error fetching orders:", error);
+    throw error;
+  }
+};
+
+export const getOrderById = async (orderId) => {
+  try {
+    const res = await api.get(`/orders/${orderId}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching order:", error);
+    throw error;
+  }
+};
+
+// ================== Wishlist ==================
+export const getWishlist = async () => {
+  try {
+    const res = await api.get("/wishlist");
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching wishlist:", error);
+    throw error;
+  }
+};
+
+export const addToWishlist = async (productId) => {
+  try {
+    const res = await api.post("/wishlist/add", {
+      productId: productId.toString(),
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
+    throw error;
+  }
+};
+
+export const removeFromWishlist = async (productId) => {
+  try {
+    const res = await api.post("/wishlist/remove", {
+      productId: productId.toString(),
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error removing from wishlist:", error);
+    throw error;
+  }
+};
+
+// ================== User Profile ==================
+export const getUserProfile = async () => {
+  try {
+    const res = await api.get("/user/profile");
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    throw error;
+  }
+};
+
+export const updateUserProfile = async (profileData) => {
+  try {
+    const res = await api.put("/user/profile", profileData);
+    return res.data;
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    throw error;
+  }
+};
+
+export const changePassword = async (passwordData) => {
+  try {
+    const res = await api.put("/user/change-password", passwordData);
+    return res.data;
+  } catch (error) {
+    console.error("Error changing password:", error);
     throw error;
   }
 };
@@ -181,96 +272,35 @@ export const getUserById = async (id) => {
   }
 };
 
-export const getWishlist = async () => {
+export const forgotPassword = async (email) => {
   try {
-    const res = await api.get("/wishlist");
+    const res = await api.post("/auth/forgot-password", { email });
     return res.data;
   } catch (error) {
-    console.error("Error fetching wishlist:", error);
+    console.error("Error in forgot password:", error);
     throw error;
   }
 };
 
-export const addToWishlist = async (productId) => {
+export const resetPassword = async (resetToken, password, confirmPassword) => {
   try {
-    const res = await api.post("/wishlist/add", {
-      productId: productId.toString(),
+    const res = await api.put(`/auth/reset-password/${resetToken}`, {
+      password,
+      confirmPassword,
     });
     return res.data;
   } catch (error) {
-    console.error("Error adding to wishlist:", error);
+    console.error("Error in reset password:", error);
     throw error;
   }
 };
 
-export const removeFromWishlist = async (productId) => {
+export const validateResetToken = async (resetToken) => {
   try {
-    const res = await api.post("/wishlist/remove", {
-      productId: productId.toString(),
-    });
+    const res = await api.get(`/auth/reset-password/${resetToken}`);
     return res.data;
   } catch (error) {
-    console.error("Error removing from wishlist:", error);
-    throw error;
-  }
-};
-
-export const getUserProfile = async () => {
-  try {
-    const res = await api.get("/user/profile");
-    return res.data;
-  } catch (error) {
-    console.error("Error fetching profile:", error);
-    throw error;
-  }
-};
-
-export const updateUserProfile = async (profileData) => {
-  try {
-    const res = await api.put("/user/profile", profileData);
-    return res.data;
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    throw error;
-  }
-};
-
-export const changePassword = async (passwordData) => {
-  try {
-    const res = await api.put("/user/change-password", passwordData);
-    return res.data;
-  } catch (error) {
-    console.error("Error changing password:", error);
-    throw error;
-  }
-};
-
-export const getOrderById = async (orderId) => {
-  try {
-    const res = await api.get(`/orders/${orderId}`);
-    return res.data;
-  } catch (error) {
-    console.error("Error fetching order:", error);
-    throw error;
-  }
-};
-
-export const createCheckoutSession = async (checkoutData) => {
-  try {
-    const res = await api.post("/orders/create-checkout-session", checkoutData);
-    return res.data;
-  } catch (error) {
-    console.error("Error creating checkout session:", error);
-    throw error;
-  }
-};
-
-export const clearCart = async () => {
-  try {
-    const res = await api.delete("/cart/clear");
-    return res.data;
-  } catch (error) {
-    console.error("Error clearing cart:", error);
+    console.error("Error validating reset token:", error);
     throw error;
   }
 };
