@@ -71,7 +71,6 @@ export default function Navbar() {
 
   const cartCount = getCartCount();
 
-  // mg
   return (
     <header className="bg-gray-900 text-white">
       {/* Top bar */}
@@ -313,7 +312,6 @@ export default function Navbar() {
               <FiMenu className="mr-1 w-3 h-3" />
               All
             </Link>
-<<<<<<< HEAD
             <Link
               to="/products?category=electronics"
               className="hover:text-yellow-400 whitespace-nowrap transition-colors"
@@ -348,24 +346,6 @@ export default function Navbar() {
               to="/products?prime=true"
               className="hover:text-yellow-400 whitespace-nowrap transition-colors"
             >
-=======
-            <Link to="/products" className="hover:text-yellow-400">
-              Electronics
-            </Link>
-            <Link to="/products" className="hover:text-yellow-400">
-              Jewelry
-            </Link>
-            <Link to="/products" className="hover:text-yellow-400">
-              Men's Fashion
-            </Link>
-            <Link to="/products" className="hover:text-yellow-400">
-              Women's Fashion
-            </Link>
-            <Link to="/products" className="hover:text-yellow-400">
-              Today's Deals
-            </Link>
-            <Link to="/products" className="hover:text-yellow-400">
->>>>>>> eb41d945ec37a8f44fbee09e7d9ffef352e57f31
               Prime
             </Link>
           </div>
